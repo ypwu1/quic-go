@@ -91,6 +91,7 @@ func newCubicSender(clock Clock, rttStats *RTTStats, reno bool, initialCongestio
 		numConnections:             defaultNumConnections,
 		cubic:                      NewCubic(clock),
 		reno:                       reno,
+		noPRR:                      true,
 	}
 }
 
