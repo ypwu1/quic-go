@@ -135,6 +135,47 @@ var _ = Describe("Handshake tests", func() {
 		})
 	}
 
+	FContext("Header Protection", func() {
+		var clientConfig *quic.Config
+
+		for _, v := range protocol.SupportedVersions {
+			version := v
+
+			BeforeEach(func() {
+				serverConfig.Versions = []protocol.VersionNumber{version}
+				clientConfig = &quic.Config{
+					Versions: []protocol.VersionNumber{version},
+				}
+			})
+
+			JustBeforeEach(func() {
+				runServer()
+			})
+
+			Context(fmt.Sprintf("using %s", version), func() {
+
+				It("test", func() {
+					sess, err := quic.DialAddr(
+						fmt.Sprintf("localhost:%d", server.Addr().(*net.UDPAddr).Port),
+						getTLSClientConfig(),
+						clientConfig,
+					)
+					Expect(err).ToNot(HaveOccurred())
+					switch sess.ConnectionState().CipherSuite {
+					case 0x1301:
+						fmt.Println("TLS_AES_128_GCM_SHA256")
+					case 0x1302:
+						fmt.Println("TLS_AES_256_GCM_SHA384")
+					case 0x1303:
+						fmt.Println("TLS_CHACHA20_POLY1305_SHA256")
+					default:
+						Fail("unknown cipher suite")
+					}
+				})
+			})
+		}
+	})
+
 	Context("Certifiate validation", func() {
 		for _, v := range protocol.SupportedVersions {
 			version := v
