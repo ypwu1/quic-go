@@ -341,10 +341,15 @@ var newClientSession = func(
 	initialPacketNumber protocol.PacketNumber,
 	initialVersion protocol.VersionNumber,
 	enable0RTT bool,
-	qlogger qlog.Tracer,
 	logger utils.Logger,
 	v protocol.VersionNumber,
 ) quicSession {
+	var qlogger qlog.Tracer
+	if conf.GetLogWriter != nil {
+		if w := conf.GetLogWriter(destConnID); w != nil {
+			qlogger = qlog.NewTracer(w, protocol.PerspectiveClient, destConnID)
+		}
+	}
 	s := &session{
 		conn:                  conn,
 		config:                conf,
@@ -357,6 +362,9 @@ var newClientSession = func(
 		qlogger:               qlogger,
 		initialVersion:        initialVersion,
 		version:               v,
+	}
+	if s.qlogger != nil {
+		s.qlogger.StartedConnection(conn.LocalAddr(), conn.RemoteAddr(), v, srcConnID, destConnID)
 	}
 	s.connIDManager = newConnIDManager(
 		destConnID,

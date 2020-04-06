@@ -1779,7 +1779,6 @@ var _ = Describe("Client Session", func() {
 			42, // initial packet number
 			protocol.VersionTLS,
 			false,
-			nil,
 			utils.DefaultLogger,
 			protocol.VersionTLS,
 		).(*session)

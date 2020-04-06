@@ -9,8 +9,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/lucas-clemente/quic-go/qlog"
-
 	"github.com/golang/mock/gomock"
 	"github.com/lucas-clemente/quic-go/internal/protocol"
 	"github.com/lucas-clemente/quic-go/internal/utils"
@@ -41,7 +39,6 @@ var _ = Describe("Client", func() {
 			initialPacketNumber protocol.PacketNumber,
 			initialVersion protocol.VersionNumber,
 			enable0RTT bool,
-			qlogger qlog.Tracer,
 			logger utils.Logger,
 			v protocol.VersionNumber,
 		) quicSession
@@ -145,7 +142,6 @@ var _ = Describe("Client", func() {
 				_ protocol.PacketNumber,
 				_ protocol.VersionNumber,
 				_ bool,
-				_ qlog.Tracer,
 				_ utils.Logger,
 				_ protocol.VersionNumber,
 			) quicSession {
@@ -177,7 +173,6 @@ var _ = Describe("Client", func() {
 				_ protocol.PacketNumber,
 				_ protocol.VersionNumber,
 				_ bool,
-				_ qlog.Tracer,
 				_ utils.Logger,
 				_ protocol.VersionNumber,
 			) quicSession {
@@ -209,7 +204,6 @@ var _ = Describe("Client", func() {
 				_ protocol.PacketNumber,
 				_ protocol.VersionNumber,
 				_ bool,
-				_ qlog.Tracer,
 				_ utils.Logger,
 				_ protocol.VersionNumber,
 			) quicSession {
@@ -246,7 +240,6 @@ var _ = Describe("Client", func() {
 				_ protocol.PacketNumber,
 				_ protocol.VersionNumber,
 				enable0RTT bool,
-				_ qlog.Tracer,
 				_ utils.Logger,
 				_ protocol.VersionNumber,
 			) quicSession {
@@ -287,7 +280,6 @@ var _ = Describe("Client", func() {
 				_ protocol.PacketNumber,
 				_ protocol.VersionNumber,
 				enable0RTT bool,
-				_ qlog.Tracer,
 				_ utils.Logger,
 				_ protocol.VersionNumber,
 			) quicSession {
@@ -333,7 +325,6 @@ var _ = Describe("Client", func() {
 				_ protocol.PacketNumber,
 				_ protocol.VersionNumber,
 				_ bool,
-				_ qlog.Tracer,
 				_ utils.Logger,
 				_ protocol.VersionNumber,
 			) quicSession {
@@ -375,7 +366,6 @@ var _ = Describe("Client", func() {
 				_ protocol.PacketNumber,
 				_ protocol.VersionNumber,
 				_ bool,
-				_ qlog.Tracer,
 				_ utils.Logger,
 				_ protocol.VersionNumber,
 			) quicSession {
@@ -425,7 +415,6 @@ var _ = Describe("Client", func() {
 				_ protocol.PacketNumber,
 				_ protocol.VersionNumber,
 				_ bool,
-				_ qlog.Tracer,
 				_ utils.Logger,
 				_ protocol.VersionNumber,
 			) quicSession {
@@ -546,7 +535,6 @@ var _ = Describe("Client", func() {
 				_ protocol.PacketNumber,
 				_ protocol.VersionNumber, /* initial version */
 				_ bool,
-				_ qlog.Tracer,
 				_ utils.Logger,
 				versionP protocol.VersionNumber,
 			) quicSession {
@@ -596,7 +584,6 @@ var _ = Describe("Client", func() {
 					_ protocol.PacketNumber,
 					_ protocol.VersionNumber,
 					_ bool,
-					_ qlog.Tracer,
 					_ utils.Logger,
 					_ protocol.VersionNumber,
 				) quicSession {
